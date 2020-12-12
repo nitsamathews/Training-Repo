@@ -1,0 +1,185 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+    <head>
+        <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+        <#if .locale == "zh_CN">
+        <link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+        <#elseif .locale == "zh_TW">
+        <link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+        <#elseif .locale == "ja_JP">
+        <link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+        <#elseif .locale == "ko_KR">
+        <link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+        <#elseif .locale == "th_TH">
+        <link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+    </#if>
+    <macrolist>
+        <macro id="nlheader">
+            &nbsp;
+        </macro>
+        <macro id="nlfooter">
+            &nbsp;
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+        <#if .locale == "zh_CN">
+        font-family: NotoSans, NotoSansCJKsc, sans-serif;
+        <#elseif .locale == "zh_TW">
+        font-family: NotoSans, NotoSansCJKtc, sans-serif;
+        <#elseif .locale == "ja_JP">
+        font-family: NotoSans, NotoSansCJKjp, sans-serif;
+        <#elseif .locale == "ko_KR">
+        font-family: NotoSans, NotoSansCJKkr, sans-serif;
+        <#elseif .locale == "th_TH">
+        font-family: NotoSans, NotoSansThai, sans-serif;
+        <#else>
+        font-family: NotoSans, sans-serif;
+    </#if>
+            }
+            table {
+            border-collapse: collapse; table-layout="fixed"
+
+            } table.a {
+            table-layout: auto;
+            width: 100%;
+            }
+            .styleTable{ border="1"
+            }
+            .content {
+            counter-reset: item 0;
+            }
+            .article {
+            counter-increment: item;
+            }
+            .article:before {
+            content: counter(item);
+            display: inline;
+            }
+</style>
+        </head>
+<body header="nlheader" header-height="2%" footer="nlfooter" footer-height="1%" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+<table border-left="0.5" border-right="0.5" border-top="0.5" width="100%"><tr>
+    <th align="center" style="padding:20px">
+        <p style="font-weight:bold; font-size:20">PROFORMA INVOICE</p>
+    </th>
+</tr></table>
+
+<table border-left="solid black" border-right="solid black" border-top="solid black" style="font-size:14px" table-colappse="colappse" width="100%"><tr>
+    <td border-bottom="solid black" border-right="solid black" style="width: 368px;">EXPORTER</td>
+    <td border-bottom="solid black" colspan="2" style="width: 441px;">Invoice No: ${record.tranid}</td>
+</tr>
+    <tr>
+        <td border-bottom="solid black" border-right="solid black" colspan="1" rowspan="2" style="width: 368px;">${companyinformation.mainaddress_text}</td>
+        <td border-bottom="solid black" border-right="solid black" style="width: 316px;">Pro.Inv.No:PI${record.tranid}</td>
+        <td border-bottom="solid black" style="width: 122px;">${record.trandate}</td>
+    </tr>
+    <tr>
+        <td border-bottom="solid black" colspan="2" style="width: 441px;">Ref P.O No. ${record.otherrefnum}</td>
+    </tr>
+    <tr>
+        <td border-bottom="solid black" border-right="solid black" style="width: 368px;">BUYER</td>
+        <td border-bottom="solid black" colspan="2" style="width: 441px;">BUYER(If&nbsp; other than Consignee)</td>
+    </tr>
+    <tr>
+        <td border-bottom="solid black" border-right="solid black" style="width: 368px;">${record.custbodyjj_consignee}</td>
+        <td colspan="2" rowspan="2" style="width: 441px;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td border-right="solid black" style="width: 368px;">${record.billaddress}</td>
+    </tr></table>
+
+<table border="1" style="font-size:14px" width="100%"><tr>
+    <td border-bottom="solid black" border-right="solid black" rowspan="2" style="height: 1px;">Pre-Carriage By:${record.custbodyjj_pre_carriage_by}</td>
+    <td border-bottom="solid black" border-right="solid black" rowspan="2" style="width: 196px; height: 1px;">Place of Receipt:${record.custbodyjj_place_of_receipt}</td>
+    <td border-bottom="solid black" border-right="solid black" style="width: 170px; height: 1px;" width="50%">Country of origin</td>
+    <td border-bottom="solid black" style="width: 262px; height: 1px;" white-space="pre" width="50%">Country of Final Destination</td>
+</tr>
+    <tr>
+        <td border-bottom="solid black" border-right="solid black" style="width: 170px;" width="50%">INDIA</td>
+        <td border-bottom="solid black" style="width: 262px;" width="50%">${record.custbodyjj_country_of_final_dest}</td>
+    </tr>
+    <tr>
+        <td border-bottom="solid black" border-right="solid black" colspan="1" rowspan="2" style="width: 176px; height: 32px;">Vessel/Flight No:${record.custbodyjj_vessel_flight_no}</td>
+        <td border-bottom="solid black" border-right="solid black" rowspan="2" style="width: 196px;">Port of Loading:${record.custbodyjj_port_of_loading}</td>
+        <td border-bottom="solid black" colspan="3" rowspan="1" style="width: 435px;">Terms Of Delivery and Payment</td>
+    </tr>
+    <tr>
+        <td border-bottom="solid black" colspan="3" rowspan="1" style="width: 435px; height: 20px;">${record.custbodyjj_terms_of_delivery_and_payme}</td>
+    </tr>
+    <tr>
+        <td border-bottom="solid black" border-right="solid black" colspan="1" rowspan="2" style="width: 176px; height: 10px">Port Of Discharge</td>
+        <td border-bottom="solid black" border-right="solid black" colspan="1" rowspan="2" style="width: 196px; height: 10px">Final Destination</td>
+        <td border-bottom="solid black" colspan="3" rowspan="1" style="width: 435px;">C.I.F Port</td>
+    </tr>
+    <tr>
+        <td border-bottom="solid black" colspan="3" rowspan="1" style="width: 435px;">The South Indian Bank</td>
+    </tr>
+    <tr>
+        <td border-bottom="solid black" border-right="solid black" colspan="1" rowspan="2" style="width: 176px; height: 43px;">${record.custbodyjj_port_of_discharge}</td>
+        <td border-bottom="solid black" border-right="solid black" colspan="1" rowspan="2" style="width: 196px; height: 43px;">${record.custbodyjj_final_destination}</td>
+        <td border-bottom="solid black" colspan="3" rowspan="1" style="width: 435px;">chalakudy Branch,Thrissur</td>
+    </tr>
+    <tr>
+        <td border-bottom="solid black" colspan="3" rowspan="1" style="width: 435px; height: 26px;">Account No:123456789101112131415</td>
+    </tr>
+    <tr>
+        <td border-right="solid black" colspan="2" rowspan="1" style="width: 374px;">&nbsp;</td>
+        <td colspan="3" rowspan="1" style="width: 435px;">Swift Code:SIBL00005</td>
+    </tr></table>
+<#assign slno=0>
+
+<table border-collapse="collapse" border-left="solid black" border-right="solid black" style="font-size:14px" width="100%"><tr>
+    <th>
+        <table width="100%"><#list record.item as item><#if item_index==0><tr border-bottom="solid black" border-right="solid black" font-size="14px">
+            <th border-right="solid black" colspan="2" style="padding:5px">SS CODE</th>
+            <th border-right="solid black" style="padding:5px" white-space="pre">Item/Goods</th>
+            <th border-right="solid black" style="padding:5px" white-space="pre">Quantity<br />(No kind of packages)<br />&nbsp;</th>
+            <th border-right="solid black" style="padding:5px" white-space="pre">Units/Bags</th>
+            <th border-right="solid black" style="padding:5px" white-space="pre">Rate/unit<br />USD</th>
+            <th style="padding:5px" white-space="pre">Amount</th>
+        </tr>
+        </#if>
+        <tr style="font-size:14px">
+            <td border-right="solid black" style="width: 12px;"><#assign slno =slno+1 />${slno}</td>
+            <td border-right="solid black" style="width: 75px;">${item.custcoljj_upd_code_}</td>
+            <td border-right="solid black">${item.item}</td>
+            <td align="center" border-right="solid black">${item.quantity}</td>
+            <td align="center" border-right="solid black">${item.units}</td>
+            <td align="center" border-right="solid black">${item.rate}</td>
+            <td align="right">${item.amount}</td>
+        </tr>
+    </#list></table>
+</th>
+        </tr>
+<tr>
+<th><#assign ntwt=0><#list record.item as item><#assign ntwt=ntwt+ item.quantity /></#list>
+<table border-top="solid black" style="font-size:14px" width="100%"><tr>
+    <td border-bottom="solid black" border-right="solid black">Gross weight</td>
+    <td border-bottom="solid black" border-right="solid black">${record.custbodyjj_gross_weight}</td>
+    <td rowspan="2">&nbsp;</td>
+</tr>
+    <tr border-bottom="solid black">
+        <td border-right="solid black">Net Wt</td>
+        <td border-right="solid black">${record.custbodyjj_net_weight}</td>
+    </tr>
+    <tr border-bottom="solid black">
+        <td border-right="solid black">Total Quantity</td>
+        <td border-right="solid black">${ntwt}</td>
+        <td align="right">${record.total}</td>
+    </tr>
+    <tr border-bottom="solid black"></tr></table>
+</th>
+        </tr>
+<tr>
+<th style="height: 63px;">
+    <table border-bottom="solid black" border-collapse="collapse" border-top="solid black" margin-top="0px" style="font-size:14px" width="100%"><tr>
+        <td border-bottom="solid black" border-right="solid black" width="60%">Declaration</td>
+    </tr>
+        <tr>
+            <td border-right="solid black" width="60%">We hereby declare that this proforma invoice shows the actual price<br />of the goods described and that all particulars are<br />true and correct.</td>
+            <td align="center" class="newspaper" style="padding:5px" width="40%"><br /><br />Signature&amp;date</td>
+        </tr></table>
+</th>
+</tr></table>
+        </body>
+        </pdf>
